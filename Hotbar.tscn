@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HotbarSlots.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Slots.tscn" type="PackedScene" id=2]
+
+[node name="Hotbar" type="GridContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 9
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 16.0
+margin_bottom = 16.0
+
+[node name="CenterContainer2" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+
+[node name="CenterContainer3" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+
+[node name="CenterContainer4" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+
+[node name="CenterContainer5" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 80.0
+margin_right = 96.0
+margin_bottom = 16.0
+
+[node name="CenterContainer6" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 100.0
+margin_right = 116.0
+margin_bottom = 16.0
+
+[node name="CenterContainer7" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 120.0
+margin_right = 136.0
+margin_bottom = 16.0
+
+[node name="CenterContainer8" parent="." instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 140.0
+margin_right = 156.0
+margin_bottom = 16.0
+
+[node name="CenterContainer9" parent="." instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 160.0
+margin_right = 176.0
+margin_bottom = 16.0

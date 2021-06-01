@@ -1,0 +1,35 @@
+{
+  "diamond_ring": {
+    "name": "Diamond Ring",
+    "item_category": "Equipment",
+    "stack_size": 1,
+    "description": "Looks Expensive",
+    "texture": "DiamondRing",
+    "stackable": false
+  },
+  "sword": {
+    "name": "Sword",
+    "item_category": "Weapon",
+    "stack_size": 1,
+    "description": "Iron Sword",
+    "texture": "Sword",
+    "stackable": false
+  },
+  "potion": {
+    "name": "Potion",
+    "item_category": "Consumable",
+    "stack_size": 25,
+    "description": "Health potion that inceases your health by 15hp",
+    "texture": "Potion",
+    "stackable": true,
+    "amount": 4
+  },
+  "tail_shield": {
+    "name": "Tail Shield",
+    "item_category": "Armor",
+    "stack_size": 1,
+    "description": "Shield that gives you +5 armor rating",
+    "texture": "TailShield",
+    "stackable": false
+  }
+}

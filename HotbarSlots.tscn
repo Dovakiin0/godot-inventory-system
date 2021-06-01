@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/PixelFont.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Slots.png" type="Texture" id=2]
+
+[node name="CenterContainer" type="CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HotBarSlots" type="TextureRect" parent="."]
+margin_left = 152.0
+margin_top = 82.0
+margin_right = 168.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Item" type="TextureRect" parent="HotBarSlots"]
+margin_left = 2.67085
+margin_top = 2.67087
+margin_right = 20.6709
+margin_bottom = 20.6709
+rect_scale = Vector2( 0.6, 0.6 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Amount" type="Label" parent="HotBarSlots/Item"]
+margin_left = 12.1965
+margin_top = 17.4183
+margin_right = 25.1965
+margin_bottom = 23.4183
+rect_scale = Vector2( 1.2, 1.2 )
+custom_fonts/font = ExtResource( 1 )
+text = "24"
+__meta__ = {
+"_edit_use_anchors_": false
+}

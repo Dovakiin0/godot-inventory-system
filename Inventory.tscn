@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://InventorySlots.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/PixelFont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Assets/CrossUI.png" type="Texture" id=3]
+[ext_resource path="res://Hotbar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Inventorygui.png" type="Texture" id=5]
+
+[node name="Inventory" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 30.0
+margin_right = 320.0
+margin_bottom = 158.0
+texture = ExtResource( 5 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InventorySlots" parent="TextureRect" instance=ExtResource( 1 )]
+margin_left = 107.123
+margin_top = 64.0
+margin_right = -36.8773
+margin_bottom = 5.0
+rect_scale = Vector2( 0.6, 0.6 )
+
+[node name="Hotbar" parent="TextureRect" instance=ExtResource( 4 )]
+margin_left = 107.123
+margin_top = 41.9745
+margin_right = -36.8773
+margin_bottom = -70.0255
+rect_scale = Vector2( 0.6, 0.6 )
+
+[node name="Exit" type="TextureButton" parent="."]
+margin_left = 216.0
+margin_top = 48.0
+margin_right = 232.0
+margin_bottom = 64.0
+rect_scale = Vector2( 0.3, 0.3 )
+texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heading" type="Label" parent="."]
+margin_left = 106.223
+margin_top = 47.6682
+margin_right = 140.223
+margin_bottom = 53.6682
+rect_scale = Vector2( 0.9, 0.9 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.369141, 0.248737, 0.128334, 1 )
+text = "Inventory"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hotbar" type="Label" parent="."]
+margin_left = 107.123
+margin_top = 63.1526
+margin_right = 141.123
+margin_bottom = 69.1526
+rect_scale = Vector2( 0.7, 0.7 )
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.369141, 0.248737, 0.128334, 1 )
+text = "Hotbar"
+__meta__ = {
+"_edit_use_anchors_": false
+}
