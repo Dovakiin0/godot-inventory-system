@@ -21,15 +21,38 @@
     "stack_size": 25,
     "description": "Health potion that inceases your health by 15hp",
     "texture": "Potion",
-    "stackable": true,
-    "amount": 4
+    "stackable": true
   },
-  "tail_shield": {
-    "name": "Tail Shield",
-    "item_category": "Armor",
+  "tall_shield": {
+    "name": "Tall Shield",
+    "item_category": "Off Hand",
     "stack_size": 1,
-    "description": "Shield that gives you +5 armor rating",
-    "texture": "TailShield",
+    "description": "Shield that gives you +5 defence rating",
+    "texture": "TallShield",
+    "stackable": false
+  },
+  "leather_head": {
+    "name": "Leather Head",
+    "item_category": "Head",
+    "stack_size": 1,
+    "description": "gives you +5 armor rating",
+    "texture": "LeatherHead",
+    "stackable": false
+  },
+  "leather_body": {
+    "name": "Leather Armor",
+    "item_category": "Body",
+    "stack_size": 1,
+    "description": "gives you +15 armor rating",
+    "texture": "LeatherBody",
+    "stackable": false
+  },
+  "leather_legs": {
+    "name": "Leather Legs",
+    "item_category": "Legs",
+    "stack_size": 1,
+    "description": "gives you +5 armor rating",
+    "texture": "LeatherLegs",
     "stackable": false
   }
 }

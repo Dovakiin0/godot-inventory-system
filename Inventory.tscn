@@ -1,75 +1,284 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource path="res://InventorySlots.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Assets/PixelFont.tres" type="DynamicFont" id=2]
-[ext_resource path="res://Assets/CrossUI.png" type="Texture" id=3]
-[ext_resource path="res://Hotbar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Inventorygui.png" type="Texture" id=5]
+[ext_resource path="res://Assets/UI/Inventorygui.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/Slots.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PixelFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Slot.gd" type="Script" id=4]
+[ext_resource path="res://Inventory.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Items/LeatherHeadOverlay.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Items/LeatherBodyOverlay.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Items/LeatherLegsOverlay.png" type="Texture" id=8]
 
-[node name="Inventory" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 16, 16 )
+
+[node name="Inventory" type="Node2D"]
+script = ExtResource( 5 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_top = 30.0
-margin_right = 320.0
-margin_bottom = 158.0
-texture = ExtResource( 5 )
-stretch_mode = 4
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 76.0
+margin_top = 7.07906
+margin_right = 204.0
+margin_bottom = 135.079
+rect_scale = Vector2( 1.3, 1.3 )
+texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InventorySlots" parent="TextureRect" instance=ExtResource( 1 )]
-margin_left = 107.123
-margin_top = 64.0
-margin_right = -36.8773
-margin_bottom = 5.0
-rect_scale = Vector2( 0.6, 0.6 )
-
-[node name="Hotbar" parent="TextureRect" instance=ExtResource( 4 )]
-margin_left = 107.123
-margin_top = 41.9745
-margin_right = -36.8773
-margin_bottom = -70.0255
-rect_scale = Vector2( 0.6, 0.6 )
-
-[node name="Exit" type="TextureButton" parent="."]
-margin_left = 216.0
-margin_top = 48.0
-margin_right = 232.0
-margin_bottom = 64.0
-rect_scale = Vector2( 0.3, 0.3 )
-texture_normal = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Heading" type="Label" parent="."]
-margin_left = 106.223
-margin_top = 47.6682
-margin_right = 140.223
-margin_bottom = 53.6682
-rect_scale = Vector2( 0.9, 0.9 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.369141, 0.248737, 0.128334, 1 )
+[node name="Header" type="Label" parent="TextureRect"]
+margin_left = 47.4694
+margin_top = 18.0109
+margin_right = 81.4694
+margin_bottom = 24.0109
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.441406, 0.327606, 0.213806, 1 )
 text = "Inventory"
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 153.928
+margin_top = 44.9907
+margin_right = 232.928
+margin_bottom = 140.991
+custom_constants/vseparation = 4
+custom_constants/hseparation = 4
+columns = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Hotbar" type="Label" parent="."]
-margin_left = 107.123
-margin_top = 63.1526
-margin_right = 141.123
-margin_bottom = 69.1526
-rect_scale = Vector2( 0.7, 0.7 )
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_color = Color( 0.369141, 0.248737, 0.128334, 1 )
-text = "Hotbar"
+[node name="Slot1" type="Panel" parent="GridContainer"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot2" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_right = 36.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot3" type="Panel" parent="GridContainer"]
+margin_left = 40.0
+margin_right = 56.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot4" type="Panel" parent="GridContainer"]
+margin_left = 60.0
+margin_right = 76.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot5" type="Panel" parent="GridContainer"]
+margin_top = 20.0
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot6" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 36.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot7" type="Panel" parent="GridContainer"]
+margin_left = 40.0
+margin_top = 20.0
+margin_right = 56.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot8" type="Panel" parent="GridContainer"]
+margin_left = 60.0
+margin_top = 20.0
+margin_right = 76.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot9" type="Panel" parent="GridContainer"]
+margin_top = 40.0
+margin_right = 16.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot10" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 40.0
+margin_right = 36.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot11" type="Panel" parent="GridContainer"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 56.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot12" type="Panel" parent="GridContainer"]
+margin_left = 60.0
+margin_top = 40.0
+margin_right = 76.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot13" type="Panel" parent="GridContainer"]
+margin_top = 60.0
+margin_right = 16.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot14" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 60.0
+margin_right = 36.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot15" type="Panel" parent="GridContainer"]
+margin_left = 40.0
+margin_top = 60.0
+margin_right = 56.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot16" type="Panel" parent="GridContainer"]
+margin_left = 60.0
+margin_top = 60.0
+margin_right = 76.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot17" type="Panel" parent="GridContainer"]
+margin_top = 80.0
+margin_right = 16.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot18" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 80.0
+margin_right = 36.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot19" type="Panel" parent="GridContainer"]
+margin_left = 40.0
+margin_top = 80.0
+margin_right = 56.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="Slot20" type="Panel" parent="GridContainer"]
+margin_left = 60.0
+margin_top = 80.0
+margin_right = 76.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
+
+[node name="EquipSlots" type="GridContainer" parent="."]
+margin_left = 104.021
+margin_top = 64.6569
+margin_right = 120.021
+margin_bottom = 120.657
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShirtSlot" type="Panel" parent="EquipSlots"]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="EquipSlots/ShirtSlot"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BodySlot" type="Panel" parent="EquipSlots"]
+margin_top = 20.0
+margin_right = 16.0
+margin_bottom = 36.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="EquipSlots/BodySlot"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LegSlot" type="Panel" parent="EquipSlots"]
+margin_top = 40.0
+margin_right = 16.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 16, 16 )
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="EquipSlots/LegSlot"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

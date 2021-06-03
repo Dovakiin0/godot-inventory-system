@@ -1,50 +1,98 @@
-extends Resource
-class_name Inventory
+extends Node2D
 
-var drag_data = null
+const SlotClass = preload("res://Slot.gd")
+onready var inventory_slots = $GridContainer
+onready var equip_slots = $EquipSlots.get_children()
 
-signal items_changed(indexes)
-
-export (Array) var items = [
-	null, null, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
-]
-
-export (Array) var hotbar_items = [
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null,
-	null
-]
-
-func set_item(item_index, item):
-	var previousItem = items[item_index]
-	items[item_index] = item
-	emit_signal("items_changed", [item_index])
-	return previousItem
+func _ready():
+	var slots = inventory_slots.get_children()
+	for i in range(slots.size()):
+		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
+		slots[i].slot_index = i
+		slots[i].slot_type = SlotClass.SlotType.INVENTORY
 	
-func swap_item(item_index, target_item_index):
-	var target_item = items[target_item_index]
-	var item = items[item_index]
-	items[target_item_index] = item
-	items[item_index] = target_item
-	emit_signal("items_changed", [item_index, target_item_index]) 
+	for i in range(equip_slots.size()):
+		equip_slots[i].connect("gui_input", self, "slot_gui_input", [equip_slots[i]])
+		equip_slots[i].slot_index = i
+	equip_slots[0].slot_type = SlotClass.SlotType.HEAD
+	equip_slots[1].slot_type = SlotClass.SlotType.BODY
+	equip_slots[2].slot_type = SlotClass.SlotType.LEGS
+	initialize_inventory()
+	initialize_equips()
 	
-func remove_item(item_index):
-	var previousItem = items[item_index]
-	items[item_index] = null
-	emit_signal("items_changed", [item_index])
-	return previousItem
+func slot_gui_input(event: InputEvent, slot: SlotClass):
+	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT and event.pressed:
+		if find_parent("UserInterface").holding_item != null:
+			if !slot.item:
+				left_click_empty_slot(slot)
+			else:
+				if find_parent("UserInterface").holding_item.item_name != slot.item.item_name:
+					left_click_different_item(event, slot)
+				else:
+					left_click_same_item(slot)
+		elif slot.item:
+			left_click_not_holding(slot)
+
+func _input(event):
+	if find_parent("UserInterface").holding_item:
+		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+func able_to_put_into_slot(slot):
+	var holding_item = find_parent("UserInterface").holding_item
+	if holding_item == null:
+		return true
+	var holding_item_category = JsonData.item_data[holding_item.item_name].item_category
+	if slot.slot_type == SlotClass.SlotType.HEAD:
+		return holding_item_category == "Head"
+	elif slot.slot_type == SlotClass.SlotType.BODY:
+		return holding_item_category == "Body"
+	elif slot.slot_type == SlotClass.SlotType.LEGS:
+		return holding_item_category == "Legs"
+	return true
+
+func left_click_empty_slot(slot):
+	if able_to_put_into_slot(slot):
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item,slot)
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = null
 	
-func make_items_unique():
-	var unique = []
-	for item in items:
-		if item != null:
-			unique.append(item.duplicate())
+func left_click_different_item(event: InputEvent, slot: SlotClass):
+	if able_to_put_into_slot(slot):
+		PlayerInventory.remove_item(slot)
+		PlayerInventory.add_item_to_empty_slot(find_parent("UserInterface").holding_item, slot)
+		var temp_item = slot.item
+		slot.pickFromSlot()
+		temp_item.global_position = event.global_position
+		slot.putIntoSlot(find_parent("UserInterface").holding_item)
+		find_parent("UserInterface").holding_item = temp_item
+
+func left_click_same_item(slot: SlotClass):
+	if able_to_put_into_slot(slot):
+		var stack_size = int(JsonData.item_data[slot.item.item_name].stack_size)
+		var able_to_add = stack_size - slot.item.item_quantity
+		if able_to_add >= find_parent("UserInterface").holding_item.item_quantity:
+			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
+			slot.item.add_item_quantity(find_parent("UserInterface").holding_item.item_quantity)
+			find_parent("UserInterface").holding_item.queue_free()
+			find_parent("UserInterface").holding_item = null
 		else:
-			unique.append(null)
-	items = unique
+			PlayerInventory.add_item_quantity(slot, find_parent("UserInterface").holding_item.item_quantity)
+			slot.item.add_item_quantity(able_to_add)
+			find_parent("UserInterface").holding_item.decrease_item_quantity(able_to_add)
+
+func left_click_not_holding(slot: SlotClass):
+	PlayerInventory.remove_item(slot)
+	find_parent("UserInterface").holding_item = slot.item
+	slot.pickFromSlot()
+	find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
+
+func initialize_inventory():
+	var slots = inventory_slots.get_children()
+	for i in range(slots.size()):
+		if PlayerInventory.inventory.has(i):
+			slots[i].initialize_item(PlayerInventory.inventory[i][0], PlayerInventory.inventory[i][1])
+
+func initialize_equips():
+	for i in range(equip_slots.size()):
+		if PlayerInventory.equips.has(i):
+			equip_slots[i].initialize_item(PlayerInventory.equips[i][0], PlayerInventory.equips[i][1])

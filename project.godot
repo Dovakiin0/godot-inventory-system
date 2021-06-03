@@ -8,25 +8,16 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Resource",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://Inventory.gd"
-} ]
-_global_script_class_icons={
-"Inventory": ""
-}
-
 [application]
 
-config/name="Inventory"
-run/main_scene="res://Main.tscn"
+config/name="new_inventory"
+run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-ItemsDatabase="*res://ItemsDatabase.gd"
+JsonData="*res://json_data.gd"
+PlayerInventory="*res://playerInventory.gd"
 
 [display]
 
@@ -62,11 +53,32 @@ texture={
 
 [input]
 
-left_mouse={
+inventory={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
+pickup={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":82,"unicode":0,"echo":false,"script":null)
+ ]
+}
+scroll_up={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":4,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+scroll_down={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="ItemDrops"
 
 [physics]
 

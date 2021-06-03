@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/LeatherHeadOverlay.png-f7977f9af2021cf0928ce4e22e6f7247.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
+source_file="res://Assets/Items/LeatherHeadOverlay.png"
+dest_files=[ "res://.import/LeatherHeadOverlay.png-f7977f9af2021cf0928ce4e22e6f7247.stex" ]
 
 [params]
 
